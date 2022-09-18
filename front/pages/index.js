@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import { Input, Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 
 export default function Home() {
   return (
@@ -10,40 +12,41 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a>FastCollect!</a>
         </h1>
 
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          Pasta the link below to get your wanted goods!
         </p>
+        
+        <div className='searchBar'>
+          <Input
+            className='searchInput'
+            placeholder="Pasta link here!"
+          />
 
+          <Button type="primary" shape="round" size="large" icon={<PlusOutlined />} className='searchButton'>
+            ADD
+          </Button>
+        </div>
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <div className="card-left">
+              <img src="https://m.media-amazon.com/images/I/816nfZ63J9L._AC_SL1500_.jpg" alt="Vercel" height="150" width="150"/>
+            </div>
+            <div className="card-right">
+              <h3>[40Pcs] Wes Care 3Ply Premium Face Mask Colors Editions | Made in Singapore | UV Clean, Soft & Comfortable, Easy to Breathe | Ships from Singapore (Midnight Black)</h3>
+            </div>
           </a>
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+          <a href="https://nextjs.org/docs" className="card">
+            <div className="card-left">
+              <img src="https://m.media-amazon.com/images/I/51nKd+WCu5L._AC_SL1500_.jpg" alt="Vercel" height="150" width="150"/>
+            </div>
+            <div className="card-right">
+              <h3>Electric Shaker Bottle, 22oz/650ML Vortex Portable Protein Shakes Mixer Cup | BPA Free | USB-Rechargeable Blender Bottles for Protein Mixes | Best Birthday Christmas Gift
+</h3>
+            </div>
           </a>
         </div>
       </main>
@@ -96,7 +99,6 @@ export default function Home() {
           justify-content: center;
           align-items: center;
         }
-
         a {
           color: inherit;
           text-decoration: none;
@@ -112,7 +114,7 @@ export default function Home() {
         .title a:active {
           text-decoration: underline;
         }
-
+        
         .title {
           margin: 0;
           line-height: 1.15;
@@ -138,6 +140,10 @@ export default function Home() {
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
+        .searchBar{
+          width: 90%
+        }
+        
         .grid {
           display: flex;
           align-items: center;
@@ -149,8 +155,8 @@ export default function Home() {
         }
 
         .card {
-          margin: 1rem;
-          flex-basis: 45%;
+          margin: 0.5rem;
+          flex-basis: 90%;
           padding: 1.5rem;
           text-align: left;
           color: inherit;
@@ -166,16 +172,23 @@ export default function Home() {
           color: #0070f3;
           border-color: #0070f3;
         }
-
+        .card-left{
+          float: left;
+          width: 150px;
+        }
+        .card-right{
+          margin-left: 170px;
+        }
         .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
+          margin: 0 0 1.5rem 0;
+          font-size: 1.2rem;
+          word-wrap: break-word;
         }
 
         .card p {
           margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
+          font-size: 1.2rem;
+          line-height: 1.2;
         }
 
         .logo {
@@ -199,7 +212,16 @@ export default function Home() {
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
         }
-
+        input.ant-input.searchInput{
+          width: 85%;
+          border-radius: 25px;
+          line-height: 2.5;
+          padding: 4px 20px;
+        }
+        button.ant-btn.ant-btn-round.ant-btn-primary.ant-btn-lg.searchButton{
+          margin-left: 8px;
+          height: 45px;
+        }
         * {
           box-sizing: border-box;
         }
