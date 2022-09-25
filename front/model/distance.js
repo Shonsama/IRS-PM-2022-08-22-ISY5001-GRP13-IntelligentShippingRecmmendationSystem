@@ -2,6 +2,7 @@ import {Schema, model, models} from "mongoose";
 
 const distanceSchema = new Schema ({
     location: String,
+    
     destination: String,
     distance: Number
 });
