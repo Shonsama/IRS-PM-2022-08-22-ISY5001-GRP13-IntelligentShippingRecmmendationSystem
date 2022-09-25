@@ -1,12 +1,28 @@
 import Head from 'next/head'
-import { Input, Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router'
+import { Input, Button, Typography } from 'antd';
+import { PlusOutlined, ArrowRightOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 export default function Home() {
+  const router = useRouter()
+  let goods =[{
+    url: "", 
+    name: "Wes Care 3Ply Premium Face Mask Colors Editions, Clean, Soft & Comfortable, Easy to Breathe",
+    imgUrl: "https://m.media-amazon.com/images/I/816nfZ63J9L._AC_SL1500_.jpg"
+  },{
+    url: "", 
+    name: "Electric Shaker Bottle, 22oz/650ML Vortex Portable Protein Shakes Mixer Cup, USB-Rechargeable Blender Bottles for Protein Mixes",
+    imgUrl: "https://m.media-amazon.com/images/I/51nKd+WCu5L._AC_SL1500_.jpg"
+  }]
+  const handleClick = (e) => {
+    e.preventDefault()
+    router.push("/recommend")
+  } 
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>FastCollent</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -30,37 +46,30 @@ export default function Home() {
           </Button>
         </div>
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <div className="card-left">
-              <img src="https://m.media-amazon.com/images/I/816nfZ63J9L._AC_SL1500_.jpg" alt="Vercel" height="150" width="150"/>
+          <div className='goods-list-title'>
+            <div className='goods-list-title-left' style={{marginTop: 5+'px'}}>
+              <Title level={4}>Goods</Title>
             </div>
-            <div className="card-right">
-              <h3>[40Pcs] Wes Care 3Ply Premium Face Mask Colors Editions | Made in Singapore | UV Clean, Soft & Comfortable, Easy to Breathe | Ships from Singapore (Midnight Black)</h3>
+            <div className='goods-list-title-right'>
+              <Button type="primary" shape="link" size="large"  onClick={handleClick}>
+                Recommend<ArrowRightOutlined />
+              </Button>
             </div>
-          </a>
-
-          <a href="https://nextjs.org/docs" className="card">
-            <div className="card-left">
-              <img src="https://m.media-amazon.com/images/I/51nKd+WCu5L._AC_SL1500_.jpg" alt="Vercel" height="150" width="150"/>
-            </div>
-            <div className="card-right">
-              <h3>Electric Shaker Bottle, 22oz/650ML Vortex Portable Protein Shakes Mixer Cup | BPA Free | USB-Rechargeable Blender Bottles for Protein Mixes | Best Birthday Christmas Gift
-</h3>
-            </div>
-          </a>
+          </div>
+          {
+            goods.map(good=>(
+              <a href={good.url} className="card">
+                <div className="card-left">
+                  <img src={good.imgUrl} alt="Vercel" height="150" width="150"/>
+                </div>
+                <div className="card-right">
+                  <h3>{good.name}</h3>
+                </div>
+              </a>
+            ))
+          }
         </div>
       </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
-      </footer>
 
       <style jsx>{`
         .container {
@@ -143,7 +152,19 @@ export default function Home() {
         .searchBar{
           width: 90%
         }
-        
+        .goods-list-title{
+          display: flex;
+          width: 90%;
+        }
+        .goods-list-title-left{
+          display: flex;
+          justify-content: flex-start;
+        }
+        .goods-list-title-right{
+          display: flex;
+          flex:1;           
+          justify-content: flex-end;
+        }
         .grid {
           display: flex;
           align-items: center;
