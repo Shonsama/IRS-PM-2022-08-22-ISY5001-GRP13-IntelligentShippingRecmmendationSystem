@@ -1,24 +1,30 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useState } from 'react';
 import { Input, Button, Typography } from 'antd';
 import { PlusOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { getGood } from './api/service';
 const { Title } = Typography;
 
 export default function Home() {
   const router = useRouter()
-  let goods =[{
-    url: "", 
-    name: "Wes Care 3Ply Premium Face Mask Colors Editions, Clean, Soft & Comfortable, Easy to Breathe",
-    imgUrl: "https://m.media-amazon.com/images/I/816nfZ63J9L._AC_SL1500_.jpg"
-  },{
-    url: "", 
-    name: "Electric Shaker Bottle, 22oz/650ML Vortex Portable Protein Shakes Mixer Cup, USB-Rechargeable Blender Bottles for Protein Mixes",
-    imgUrl: "https://m.media-amazon.com/images/I/51nKd+WCu5L._AC_SL1500_.jpg"
-  }]
+  const [goods, setGoods] = useState([]);
+  let link = ""
+
   const handleClick = (e) => {
     e.preventDefault()
-    router.push("/recommend")
-  } 
+    router.push({
+			path: '/recommand',
+			query: {
+				goods: this.goods,
+			}
+		})
+  }
+  const handleAddClick = () => {
+    let good = getGood(link)
+    goods.add(good)
+    setGoods(goods)
+  }
   return (
     <div className="container">
       <Head>
@@ -39,9 +45,10 @@ export default function Home() {
           <Input
             className='searchInput'
             placeholder="Pasta link here!"
+            value = {link}
           />
 
-          <Button type="primary" shape="round" size="large" icon={<PlusOutlined />} className='searchButton'>
+          <Button type="primary" shape="round" size="large" icon={<PlusOutlined />} className='searchButton' onClick={handleAddClick}>
             ADD
           </Button>
         </div>

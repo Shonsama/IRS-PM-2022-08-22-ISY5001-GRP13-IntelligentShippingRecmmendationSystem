@@ -1,26 +1,13 @@
 import { Input, Button, Typography } from 'antd';
+import { recommend } from './api/service';
+import { useRoute } from 'next/router'
 const { Title } = Typography;
 
-const Recommend = () => {
-    let centrial_point = "Shenzhen"
-    let day = 4
-    let goods =[{
-        url: "", 
-        name: "Wes Care 3Ply Premium Face Mask Colors Editions, Clean, Soft & Comfortable, Easy to Breathe",
-        imgUrl: "https://m.media-amazon.com/images/I/816nfZ63J9L._AC_SL1500_.jpg"
-      },{
-        url: "", 
-        name: "Electric Shaker Bottle, 22oz/650ML Vortex Portable Protein Shakes Mixer Cup, USB-Rechargeable Blender Bottles for Protein Mixes",
-        imgUrl: "https://m.media-amazon.com/images/I/51nKd+WCu5L._AC_SL1500_.jpg"
-      },{
-        url: "", 
-        name: "Wes Care 3Ply Premium Face Mask Colors Editions, Clean, Soft & Comfortable, Easy to Breathe",
-        imgUrl: "https://m.media-amazon.com/images/I/816nfZ63J9L._AC_SL1500_.jpg"
-      },{
-        url: "", 
-        name: "Electric Shaker Bottle, 22oz/650ML Vortex Portable Protein Shakes Mixer Cup, USB-Rechargeable Blender Bottles for Protein Mixes",
-        imgUrl: "https://m.media-amazon.com/images/I/51nKd+WCu5L._AC_SL1500_.jpg"
-      }]
+const Recommend = ({ data }) => {
+    let centrial_point = data.centrial_point
+    let day = data.day
+    let goods = data.goods
+
     return (
         <div className="container">
             <main>
@@ -228,5 +215,13 @@ const Recommend = () => {
         </div>
     )
 }
-  
+export async function getStaticProps() {
+    const route = useRoute()
+    const data = recommend(route.query)
+    return {
+      props: {
+        data,
+      },
+    }
+}
 export default Recommend

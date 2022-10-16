@@ -17,7 +17,6 @@ def getGoods():
     return Response(key2info(req["keyword"]), status=200, content_type="application/json")
 
 app.run(host='0.0.0.0', port=80, debug=True)
-#ngrok http https://localhost:5000 -host-header="localhost:5000"
 
 
 
