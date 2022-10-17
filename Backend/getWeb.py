@@ -15,11 +15,9 @@ def get_good_message(url):
     soup = BeautifulSoup(html, 'html.parser')
 
     name = soup.find("span", class_="a-size-large product-title-word-break")
-    print(name.text)
 
     img = soup.find("div", class_="imgTagWrapper").find('img')
     src = img.get("src")
-    print(src)
 
     data = [{'name': name.text, 'img': src}]
     return json.dumps(data)

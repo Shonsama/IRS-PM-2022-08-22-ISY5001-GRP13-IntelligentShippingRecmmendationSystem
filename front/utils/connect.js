@@ -2,9 +2,9 @@ import axios from 'axios'
 
 let baseURL
 if( process.env.NODE_ENV === 'production' ) {
-    baseURL = '上线的地址'
+    baseURL = 'http://0.0.0.0:80/'
 } else {
-    baseURL = 'http://127.0.0.1:80/'
+    baseURL = 'http://localhost:80/'
 }
 
 // 拦截器
@@ -17,7 +17,6 @@ axios.interceptors.request.use((config) => {
     console.log(config)
     config.headers['Accept'] = 'application/vnd.dpexpo.v1+json'
     config.baseURL = baseURL
-    config.timeout = 10000
     return config;
 }, (error) => {
     return Promise.reject(error)

@@ -1,8 +1,8 @@
-import { getAxios, postAxios } from '@/utils/axios'
-const url = '/a/b'
+import { getAxios, postAxios } from '../../utils/connect'
+const url = '/getGood'
 
 export const getGood = (params) => {
-    return postAxios({url, params})
+    return getAxios({url, params})
 }
 
 export const recommend = (params) => {

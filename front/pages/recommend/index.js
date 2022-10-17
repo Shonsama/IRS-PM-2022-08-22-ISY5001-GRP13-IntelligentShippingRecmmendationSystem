@@ -1,12 +1,15 @@
 import { Input, Button, Typography } from 'antd';
-import { recommend } from './api/service';
-import { useRoute } from 'next/router'
+import { recommend } from '../api/service';
+import { useRouter } from 'next/router'
 const { Title } = Typography;
 
-const Recommend = ({ data }) => {
-    let centrial_point = data.centrial_point
-    let day = data.day
-    let goods = data.goods
+const Recommend = () => {
+    const route = useRouter()
+    const data = "recommend(route.query)"
+
+    let centrial_point = data.centrial_point || ""
+    let day = data.day || ""
+    let goods = data.goods || []
 
     return (
         <div className="container">
@@ -214,14 +217,5 @@ const Recommend = ({ data }) => {
             `}</style>
         </div>
     )
-}
-export async function getStaticProps() {
-    const route = useRoute()
-    const data = recommend(route.query)
-    return {
-      props: {
-        data,
-      },
-    }
 }
 export default Recommend

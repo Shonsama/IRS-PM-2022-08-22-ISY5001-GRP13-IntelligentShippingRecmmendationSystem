@@ -1,15 +1,17 @@
 from flask import Flask, Response, request
-import json
+from flask_cors import CORS, cross_origin
+import json, sys
 
 from getWeb import get_good_message
 from getGoods import key2info
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
-@app.route("/getGood", methods = ["POST"])
+@app.route("/getGood", methods = ["GET"])
 def getGood():
-    req = request.get_json(silent=True, force=True)
-    return Response(get_good_message(req["link"]), status=200, content_type="application/json")
+    req = request.args.get("link")
+    return Response(get_good_message(req), status=200, content_type="application/json")
 
 @app.route("/recommend", methods = ["POST"])
 def getGoods():
