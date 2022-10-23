@@ -14,8 +14,7 @@ axios.interceptors.response.use((response) => {
     return Promise.reject(error)
 })
 axios.interceptors.request.use((config) => {
-    console.log(config)
-    config.headers['Accept'] = 'application/vnd.dpexpo.v1+json'
+    config.headers['Accept'] = '*'
     config.baseURL = baseURL
     return config;
 }, (error) => {

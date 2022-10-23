@@ -23,15 +23,21 @@ def parsePage(ilt, html):
         plt = re.findall(r'\"view_price\"\:\"[\d\.]*\"', html)              #以列表类型返回形如  "view_price":"186.2" ,反斜杠\" \"表示"view_price"      
         tlt = re.findall(r'\"raw_title\"\:\".*?\"', html)                   #以列表类型返回形如  "raw_title":"小米手机"(最小匹配，输出最短字符串)
         lct = re.findall(r'\"item_loc\"\:\".*?\"', html) #以列表类型返回形如  "raw_title":"小米手机"(最小匹配，输出最短字符串
-        pic = re.findall(r'\"pic_url\"\:\".*?\"', html)                  
+        pic = re.findall(r'\"pic_url\"\:\".*?\"', html)
+        web = re.findall(r'\"detail_url\"\:\".*?\"', html)                  
         for i in range(0,len(plt)+1): 
-            item ={
-                "price": eval(plt[i].split(':')[1]),              #详见淘宝商品信息爬虫（1）
-                "title": eval(tlt[i].split(':')[1]),
-                "local": eval(lct[i].split(':')[1]),
-                "pic_url": eval(pic[i].split(':')[1])
-            }                                          
-            ilt.append(item)                          #在列表后新增一个元素
+            loc = lct[i].split(':')[1].split('"')[1].split(" ")
+            newloc = loc[len(loc) - 1]
+            item =[
+                eval(plt[i].split(':')[1]),              #详见淘宝商品信息爬虫（1）
+                eval(tlt[i].split(':')[1]),
+                newloc,
+                eval(pic[i].split(':')[1]),
+                eval(web[i].split(':')[1])
+            ]
+            if ilt.get(item[2]) == None or ilt.get(item[2])[0] > item[0]:
+                ilt.setdefault(item[2],item)
+            
     except:
         print("")
 
@@ -39,9 +45,9 @@ def parsePage(ilt, html):
 
 def key2info(keywords):
     goods = keywords
-    depth = 3
+    depth = 2
     start_url = 'https://s.taobao.com/search?q=' + goods
-    infoList = []
+    infoList = {}
     for i in range(depth):                                    #循环3次
         try:
             url = start_url + '&s=' + str(44 * i)             #淘宝商品页面列表从0,44,88。
@@ -49,4 +55,12 @@ def key2info(keywords):
             parsePage(infoList, html)
         except:
             continue
-    return json.dumps(infoList)
+    resList = list(infoList.values())
+    return resList
+
+def list2info(keywords):
+    goodList = []
+    for i in keywords:
+        good = key2info(i)
+        goodList.append(good)
+    return goodList
