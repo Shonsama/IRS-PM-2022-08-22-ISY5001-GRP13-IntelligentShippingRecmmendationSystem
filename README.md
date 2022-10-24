@@ -31,10 +31,10 @@
 
 ## SECTION 5 : USER GUIDE
 
-Please refer to [user guide]()
+Please refer to [user guide](https://github.com/Shonsama/FastCollect/blob/main/ProjectReport/userGuide.md)
 
 ---
 
 ## SECTION 6 : PROJECT REPORT / PAPER
 
-Refer to project report at Github Folder: [ProjectReport]()
+Refer to project report at Github Folder: [ProjectReport](https://github.com/Shonsama/FastCollect/blob/main/ProjectReport/userGuide.md)
