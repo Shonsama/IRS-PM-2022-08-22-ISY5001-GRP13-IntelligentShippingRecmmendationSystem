@@ -1,10 +1,7 @@
 
 ## SECTION 1 : PROJECT TITLE
 
-## FastCollect -- Intelligent shopping recommendation system
-
-
-
+## FastCollect -- Intelligent shipping recommendation system
 
 ---
 
@@ -40,7 +37,7 @@ Our project team hopes that with our solution, individual customers could have a
 
 [promotion video with use demo](https://www.bilibili.com/video/BV1A14y1L73w/?vd_source=8a13e6a42379e18b5470371239594a54)
 
-[technique video for system architecture and implementaion]()
+[technique video for system architecture and implementaion](https://www.bilibili.com/video/BV1he4y127Wq/)
 
 ---
 
@@ -52,4 +49,4 @@ Please refer to [user guide](https://github.com/Shonsama/FastCollect/blob/main/P
 
 ## SECTION 6 : PROJECT REPORT / PAPER
 
-Refer to project report at Github Folder: [PROJECT REPORT](https://github.com/Shonsama/FastCollect/blob/main/ProjectReport/IRS_Practice_Module_Project_Report.pdf)
+Refer to project report at Github Folder: [PROJECT REPORT](https://github.com/Shonsama/FastCollect/blob/main/ProjectReport/IRS-PM-2022-08-22-ISY5001-GRP13-IntelligentShippingRecmmendationSystem-ProjectReport.pdf)
