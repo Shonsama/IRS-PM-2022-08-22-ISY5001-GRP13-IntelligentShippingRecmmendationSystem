@@ -12,6 +12,6 @@ Steps to run the system:
    npm run dev
    ````
 3. Create a new conda environment with python 3.8
-4. Activate your conda environment and install the below packages: flask
+4. Activate your conda environment and install the below packages: flask, jieba
 5. run app.py in /back file in spider
 6. open http://127.0.0.1:3000 and start use

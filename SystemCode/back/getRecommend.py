@@ -2,7 +2,7 @@ from getGoods import list2info
 import json
 import random
 from operator import itemgetter
-CXPB, MUTPB, NGEN, popsize = 0.9, 0.9, 1000, 1000
+CXPB, MUTPB, NGEN, popsize = 0.9, 0.9, 100, 1000
 
 with open("durListNew.json", encoding="utf-8") as f:
     dur = json.load(f)
@@ -61,7 +61,7 @@ class GA:
        x_time = max(x_time, item)
     x_cost += getTransFee(len(geneinfo) - 1, mode)
     x_time += route[geneinfo[len(geneinfo) - 1]][1]
-    y = (x_time/5)**2 + (x_cost/50)**2
+    y = (x_time/10)**2 + (x_cost/100)**2
     return y
 
   def getCostAndTime(self, geneinfo):
@@ -121,6 +121,7 @@ class GA:
     for i in range(dim):
       if min(pos1, pos2) <= i < max(pos1, pos2):
           temp2.append(geninfo2[i])
+          
           temp1.append(geninfo1[i])
       else:
           temp2.append(geninfo1[i])
@@ -178,26 +179,29 @@ class GA:
         self.bestindividual = best_ind
 
 def recommend(keywords):
-    goodList = list2info(keywords)
-    up = []  # upper range for variables
-    low = []  # lower range for variables
-    for i in goodList:
-        up.append(len(i)-1)
-        low.append(0)
-    up.append(len(route)-1)
-    low.append(0)
-    parameter = [CXPB, MUTPB, NGEN, popsize, low, up, goodList]
-    run = GA(parameter)
-    run.GA_main()
-    res = run.bestindividual['Gene'].data
-    goods = []
-    for i in range(0, len(goodList)):
-        goods.append(goodList[i][res[i]])
-    item = run.getCostAndTime(res)
-    result = {
-        "goods": goods,
-        "cost": int(item[0]),
-        "time": item[1],
-        "center": route[res[len(res)-1]][0].split("-")[0]
-    }
+    try: 
+      goodList = list2info(keywords)
+      up = []  # upper range for variables
+      low = []  # lower range for variables
+      for i in goodList:
+          up.append(len(i)-1)
+          low.append(0)
+      up.append(len(route)-1)
+      low.append(0)
+      parameter = [CXPB, MUTPB, NGEN, popsize, low, up, goodList]
+      run = GA(parameter)
+      run.GA_main()
+      res = run.bestindividual['Gene'].data
+      goods = []
+      for i in range(0, len(goodList)):
+          goods.append(goodList[i][res[i]])
+      item = run.getCostAndTime(res)
+      result = {
+          "goods": goods,
+          "cost": int(item[0]),
+          "time": item[1],
+          "center": route[res[len(res)-1]][0].split("-")[0]
+      }
+    except: 
+      result = {'error': "system.error"}
     return json.dumps(result)

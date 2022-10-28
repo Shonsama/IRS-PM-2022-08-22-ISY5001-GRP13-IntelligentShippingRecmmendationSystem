@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { Input, Button, Typography, Spin, Modal } from 'antd';
+import { Input, Button, Typography, Spin, Modal, Tag } from 'antd';
 import { PlusOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { getGood, recommend } from './api/service';
 const { Title } = Typography;
@@ -44,9 +44,9 @@ export default function Home() {
     let good = await getGood({ link })
     goods.push(good[0])
     let newGoods = goods.slice(0)
-    console.log(goods)
     setGoods(newGoods)
     setLoading(false)
+    setLink("")
   }
   const onInputChange = (e) => {
     console.log(e.target.value)
@@ -99,6 +99,13 @@ export default function Home() {
                   </div>
                   <div className="card-right">
                     <h3>{good.name}</h3>
+                    {
+                      good.keywords.map(keyword => (
+                        <Tag>
+                          {keyword}
+                        </Tag>
+                      ))
+                    }
                   </div>
                 </div>
               ))
@@ -145,6 +152,7 @@ export default function Home() {
           .container {
             background-color: #f7f7f7;
             width:100%;
+
             min-height: 100vh;
             padding: 0 0.5rem;
             display: flex;
@@ -186,7 +194,10 @@ export default function Home() {
             line-height: 1.15;
             font-size: 4rem;
           }
-
+          .tag{
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+          }
           .title,
           .description {
             text-align: center;
@@ -224,6 +235,7 @@ export default function Home() {
           }
           .card-content{
             max-height: 60vh;
+            min-width: 100%;
             overflow-y: scroll;
           }
           .grid {
@@ -235,7 +247,7 @@ export default function Home() {
             margin-top: 3rem;
             padding-top: 1rem;
             padding-bottom: 1rem;
-            width:100%;
+            min-width:100%;
             box-shadow: 0 12px 5px -10px rgba(0,0,0,0.1), 0 0 4px 0 rgba(0,0,0,0.1);
           }
 
@@ -249,6 +261,7 @@ export default function Home() {
             text-decoration: none;
             border: 1px solid #eaeaea;
             border-radius: 10px;
+            min-width:95%;
             transition: color 0.15s ease, border-color 0.15s ease;
           }
           .card-modal {

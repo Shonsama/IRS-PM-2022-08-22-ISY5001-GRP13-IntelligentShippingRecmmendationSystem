@@ -18,26 +18,25 @@ def getHTMLText(url):
         return ""
 
 
-def parsePage(ilt, html):
+def parsePage(ilt, html, price):
     try:
         plt = re.findall(r'\"view_price\"\:\"[\d\.]*\"', html)              #以列表类型返回形如  "view_price":"186.2" ,反斜杠\" \"表示"view_price"      
         tlt = re.findall(r'\"raw_title\"\:\".*?\"', html)                   #以列表类型返回形如  "raw_title":"小米手机"(最小匹配，输出最短字符串)
-        lct = re.findall(r'\"item_loc\"\:\".*?\"', html) #以列表类型返回形如  "raw_title":"小米手机"(最小匹配，输出最短字符串
+        lct = re.findall(r'\"item_loc\"\:\".*?\"', html)                    #以列表类型返回形如  "raw_title":"小米手机"(最小匹配，输出最短字符串
         pic = re.findall(r'\"pic_url\"\:\".*?\"', html)
-        web = re.findall(r'\"detail_url\"\:\".*?\"', html)                  
+        web = re.findall(r'\"detail_url\"\:\".*?\"', html)
         for i in range(0,len(plt)+1): 
             loc = lct[i].split(':')[1].split('"')[1].split(" ")
             newloc = loc[len(loc) - 1]
-            item =[
+            item = [
                 eval(plt[i].split(':')[1]),              #详见淘宝商品信息爬虫（1）
                 eval(tlt[i].split(':')[1]),
                 newloc,
                 eval(pic[i].split(':')[1]),
                 eval(web[i].split(':')[1])
             ]
-            if ilt.get(item[2]) == None or ilt.get(item[2])[0] > item[0]:
-                ilt.setdefault(item[2],item)
-            
+            ilt.append(item)
+            price += float(eval(plt[i].split(':')[1]))
     except:
         print("")
 
@@ -49,16 +48,27 @@ def key2info(keywords):
     goods = keywords
     depth = 2
     start_url = 'https://s.taobao.com/search?q=' + goods
-    infoList = {}
-    for i in range(depth):                                    #循环3次
+    infoList = []
+    price = 0
+    for i in range(depth):                                    #循环2次
         try:
             url = start_url + '&s=' + str(44 * i)             #淘宝商品页面列表从0,44,88。
             html = getHTMLText(url)                          #两个函数
-            parsePage(infoList, html)
+            parsePage(infoList, html, price)
         except:
             continue
-    resList = list(infoList.values())
-    return resList
+    if len(infoList) == 0:
+        return []
+    average = price/len(infoList)
+    resList = []
+    for item in infoList:
+        if float(item[0]) >= (average * 0.8):
+            resList.append(item)
+    goodLocList = {}
+    for item in resList:
+        if goodLocList.get(item[2]) == None or goodLocList.get(item[2])[0] > item[0]:
+                goodLocList.setdefault(item[2],item)
+    return list(goodLocList.values())
 
 def list2info(keywords):
     goodList = []

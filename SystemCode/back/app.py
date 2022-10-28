@@ -11,6 +11,7 @@ CORS(app, supports_credentials=True)
 @app.route("/getGood", methods = ["GET"])
 def getGood():
     req = request.args.get("link")
+    print("start")
     return Response(get_good_message(req), status=200, content_type="application/json")
 
 @app.route("/recommend", methods = ["POST"])
