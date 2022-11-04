@@ -2,6 +2,9 @@ The code can be executed from python and node.js environment. Below is the softw
 1. python 3.8
 2. node.js 16.17.0
 3. flask 2.2.2
+4. flask_cors
+5. bs4
+6. jieba
 
 Steps to run the system:
 1. Download the files from GitHub.
