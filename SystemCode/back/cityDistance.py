@@ -8,7 +8,7 @@ Created on Tue Oct 18 18:57:02 2022
 import json
 import urllib.request #发送请求
 from urllib import parse #URL编码
-key = "41a49f47b8e6b4f0117cd0b8e98ff812"
+key = "" // Enter your own Amap API key on https://lbs.amap.com/api/webservice/guide/create-project/get-key
 
 def getLoc(i):
     
